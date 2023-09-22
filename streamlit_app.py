@@ -1,7 +1,7 @@
 import streamlit
 import requests
 import pandas
-import snowflake-connector
+import snowflake.connector
 
 
 streamlit.header('🍌🥭 Build Your Own Smoothy! 🥝🍇')
