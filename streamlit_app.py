@@ -22,17 +22,23 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 streamlit.dataframe(fruits_to_show)
 
+
+
+def get_fruityvise_data(this_fruit_choice) :
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+  fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+  return fruityvice_normalized
+
 streamlit.header('🍌🥭 Fruityvice Fruit Advice! 🥝🍇')
+try :
+  fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
+  if not fruit_choice :
+    streamlit.error('please select a food to get the information')
+  else :
+    back_from_function = get_fruityvise_data(fruit_choice)
+    streamlit.dataframe(back_from_function)
 
-fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
-streamlit.write('The user entered ', fruit_choice)
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
-streamlit.text(fruityvice_response.json())
-
-# write your own comment -what does the next line do? 
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-# write your own comment - what does this do?
-streamlit.dataframe(fruityvice_normalized)
+# streamlit.text(fruityvice_response.json())
 
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
@@ -48,3 +54,7 @@ my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchall()
 streamlit.text("Hello from Snowflake:")
 streamlit.dataframe(my_data_row)
+
+
+
+
