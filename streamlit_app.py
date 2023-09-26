@@ -24,33 +24,32 @@ streamlit.dataframe(fruits_to_show)
 
 
 
-def get_fruityvise_data(this_fruit_choice) :
-  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
-  fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-  return fruityvice_normalized
+# def get_fruityvise_data(this_fruit_choice) :
+#   fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+#   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+#   return fruityvice_normalized
 
-streamlit.header('🍌🥭 Fruityvice Fruit Advice! 🥝🍇')
-try :
-  fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
-  if not fruit_choice :
-    streamlit.error('please select a food to get the information')
-  else :
-    back_from_function = get_fruityvise_data(fruit_choice)
-    streamlit.dataframe(back_from_function)
+# streamlit.header('🍌🥭 Fruityvice Fruit Advice! 🥝🍇')
+# try :
+#   fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
+#   if not fruit_choice :
+#     streamlit.error('please select a food to get the information')
+#   else :
+#     back_from_function = get_fruityvise_data(fruit_choice)
+#     streamlit.dataframe(back_from_function)
 
-# streamlit.text(fruityvice_response.json())
 
 # streamlit.header('Fruit Load List Contains :')
 
-def get_fruit_load_list() :
-  with my_cnx.cursor() as my_cur :
-    my_cur.execute("select * from fruit_load_list")
-    return my_cur.fetchall()
+# def get_fruit_load_list() :
+#   with my_cnx.cursor() as my_cur :
+#     my_cur.execute("select * from fruit_load_list")
+#     return my_cur.fetchall()
 
-if streamlit.button('get fruit load list') :
-  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-  my_data_rows =  get_fruit_load_list()
-  streamlit.dataframe(fruit_list)
+# if streamlit.button('get fruit load list') :
+#   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+#   my_data_rows =  get_fruit_load_list()
+#   streamlit.dataframe(fruit_list)
 
 
 
