@@ -68,7 +68,7 @@ add_my_fruit = streamlit.text_input('What fruit would you like information about
 if streamlit.button('Add fruit to the list') :
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows =  insert_row_snowflake(add_my_fruit)
-  streamlit.txet(my_data_rows)
+  streamlit.text(my_data_rows)
 
 # # fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
 # # streamlit.text(fruityvice_response.json())
